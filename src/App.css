@@ -1,0 +1,245 @@
+/* src/App.css */
+
+.app {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  position: relative;
+  color: white;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+/* Стеклянная панель плеера (Glassmorphism) */
+.player-panel {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* для Safari */
+  padding: 25px 40px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  min-width: 340px;
+}
+
+.track-name {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  max-width: 300px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.controls-row {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.play-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: white;
+  color: #302b63;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s ease;
+}
+
+.play-button:hover {
+  transform: scale(1.08);
+}
+
+.play-button:active {
+  transform: scale(0.95);
+}
+
+.upload-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.upload-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.hint {
+  opacity: 0.6;
+  font-size: 14px;
+  margin: 0;
+}
+
+.rotate-hint {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  opacity: 0.5;
+  font-size: 14px;
+  user-select: none;
+}
+/* Кнопки предыдущий/следующий */
+.skip-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.skip-button:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: scale(1.06);
+}
+.track-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.track-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  max-width: 300px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.track-artist {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.7;
+  max-width: 300px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Полноэкранный режим */
+.app.fullscreen {
+  background: #000;
+}
+
+.app.fullscreen .player-panel,
+.app.fullscreen .track-list-wrapper,
+.app.fullscreen .preset-switcher,
+.app.fullscreen .rotate-hint {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Автоскрытие UI */
+.player-panel,
+.track-list-wrapper,
+.preset-switcher {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.player-panel.hidden,
+.track-list-wrapper.hidden,
+.preset-switcher.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.player-panel.visible,
+.track-list-wrapper.visible,
+.preset-switcher.visible {
+  opacity: 1;
+}
+
+/* Обёртка списка треков */
+.track-list-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 5;
+}
+
+/* Переключатель пресетов */
+.preset-switcher {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 5;
+}
+
+.preset-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.preset-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.preset-btn.active {
+  background: rgba(139, 92, 246, 0.3);
+}
+
+/* Кнопка полного экрана */
+.fullscreen-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+
+.fullscreen-button:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
